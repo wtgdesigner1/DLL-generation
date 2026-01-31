@@ -1,4 +1,4 @@
-name: Auto Build DISCON DLL
+name: Build DISCON DLL (ifort)
 
 on:
   push:
@@ -14,13 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Intel oneAPI Fortran
+      - name: Setup Intel oneAPI (classic ifort)
         uses: fortran-lang/setup-fortran@v1
         with:
           compiler: intel
           version: '2023.2'
 
-      - name: Compile DISCON.dll
+      - name: Build using ifort
         working-directory: DISCON
         shell: cmd
         run: build.bat
@@ -28,5 +28,5 @@ jobs:
       - name: Upload DISCON.dll
         uses: actions/upload-artifact@v4
         with:
-          name: DISCON-dll
+          name: DISCON-dll-ifort
           path: DISCON/DISCON.dll
